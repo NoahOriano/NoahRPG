@@ -1,1 +1,3 @@
+entity Package
 
+Contains classes that handle construction and drawing of entities such as the player and NPC's

@@ -1,14 +1,13 @@
 package entity;
 
+import assets.TextureHandler;
 import main.GamePanel;
 import map.MapGrid;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.lang.Math;
+
+// TODO: Add Comments, Extend Mob and move all mob shared methods & variables to Mob class
 
 public class Sheep implements Entity {
     public boolean alive = true;
@@ -60,13 +59,7 @@ public class Sheep implements Entity {
         }
     }
     public void updateGraphic(){
-        try {
-            img = ImageIO.read(new File("src/assets/entities/sheep/right.png"));
-            img = img.getScaledInstance(GamePanel.tileSize,GamePanel.tileSize,img.SCALE_DEFAULT);
-        }
-        catch (IOException e) {
-            System.out.println("Error");
-        }
+        img = TextureHandler.get("sheep");
     }
     public void checkCollisions(){
         for(Entity e : player.entityHandler.entities){

@@ -3,6 +3,8 @@ package entity;
 import java.awt.*;
 import java.util.ArrayList;
 
+// TODO: Add Comments
+
 public class EntityHandler{
     public Player player;
     public ArrayList<Entity> entities;

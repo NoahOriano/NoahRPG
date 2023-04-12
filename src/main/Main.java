@@ -1,5 +1,6 @@
 package main;
 
+import assets.TextureHandler;
 import main.GamePanel;
 
 import javax.swing.JFrame;
@@ -8,6 +9,8 @@ import java.awt.image.BufferStrategy;
 
 public class Main {
     public static void main(String[] args) {
+
+        TextureHandler.start();
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

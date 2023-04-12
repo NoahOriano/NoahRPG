@@ -1,0 +1,6 @@
+ui package
+
+Handles creation and manipulation of user interface elements which are drawn on top of all game elements
+
+
+TODO: Create objects for health bar, item selection / inventory, minimap,

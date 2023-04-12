@@ -4,7 +4,7 @@ import main.GamePanel;
 import map.MapGrid;
 
 import java.awt.*;
-
+// TODO: Add Comments
 public class Attack {
     int duration;
     int strength;

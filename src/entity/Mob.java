@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
 
+// TODO: Add Comments, Convert into base method for all other entities to extend
+
 public class Mob implements Entity {
     public boolean alive = true;
     public int team;

@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-public class Textures {
+public class TextureGenerator {
     public static int tileSize = 16;
     public static int numTiles = 5;
     public static int width = numTiles*tileSize, height = numTiles*tileSize;

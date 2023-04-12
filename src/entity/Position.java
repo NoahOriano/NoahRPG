@@ -2,7 +2,7 @@ package entity;
 
 import main.GamePanel;
 import map.MapGrid;
-
+// TODO: Add Comments
 public class Position {
     private int x;
     private int y;

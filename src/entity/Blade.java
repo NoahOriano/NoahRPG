@@ -9,6 +9,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+// TODO: Add Comments
 public class Blade implements Weapon{
     Player player;
     MouseHandler mouseHandler;
@@ -21,21 +22,6 @@ public class Blade implements Weapon{
         this.entityHandler = entityHandler;
         this.size = 60;
     }
-    /*
-    @Override
-    public boolean attack(Player player, MouseHandler mouseHandler, int charge) {
-        if(charge > delay){
-            Position position = new Position((player.getCol() + (mouseHandler.mouseX- GamePanel.screenWidth/2)/ MapGrid.ZonePixels),
-                    (player.getRow() + (mouseHandler.mouseY- GamePanel.screenHeight/2)/ MapGrid.ZonePixels),
-                    (player.getX() + (mouseHandler.mouseX- GamePanel.screenWidth/2)%MapGrid.ZonePixels),
-                    (player.getY() + (mouseHandler.mouseY- GamePanel.screenHeight/2)%MapGrid.ZonePixels));
-            entityHandler.attacks.add(new Attack(30, 10, 10,
-                    player,position,10,10, entityHandler));
-            return true;
-        }
-        return false;
-    }
-    */
     public boolean attack(Player player, MouseHandler mouseHandler, int charge) {
         if(charge > delay){
             //src/assets/equipment/sword/swordDownLeft.png

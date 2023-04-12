@@ -1,1 +1,11 @@
+NoahRPG game
 
+Description:
+
+
+TODO: Add Comments to many of the classes
+TODO: I will run into issues with occlusion with my current code structure, i need
+ _ to add a way for entities and eventually structures to be drawn from back to front, which requires
+ _ combining the drawing of the map structures (not base tiles) and entities and implementing a sorted
+ _ drawing methodology sorted from lowest y to largest (back to front)
+ TODO: Implement user interface items such as a health bar

@@ -2,8 +2,12 @@ package main;
 
 import entity.*;
 import map.MapGrid;
+import ui.UserInterface;
+
 import javax.swing.JPanel;
 import java.awt.*;
+
+// TODO: eventually replace graphics handling to use a canvas and use a page-flip buffer strategy
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -20,7 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     EntityHandler entityHandler = new EntityHandler();
     MapGrid map = new MapGrid();
-    Player player = new Player(this, this.keyHandler, this.mouseHandler, this.entityHandler);
+    Player player = new Player(this.keyHandler, this.mouseHandler, this.entityHandler);
+    UserInterface ui = new UserInterface();
 
 
     public GamePanel(){

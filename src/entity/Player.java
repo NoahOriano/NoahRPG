@@ -1,33 +1,29 @@
 package entity;
 
+import assets.TextureHandler;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
-import map.MapGrid;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
+// TODO: Add Comments, Implement Stats, Handle Player Death Behavior
 public class Player implements Entity {
 
-    public GamePanel gp;
     public KeyHandler keyHandler;
     public MouseHandler mouseHandler;
     public EntityHandler entityHandler;
     private int money = 0;
     private int xp = 0;
     private int health = 100;
+    private int maxHealth = 100;
     private Position position;
     private int playerSpeed;
     private int attackDelta;
     private Weapon weapon;
     private int team = ALLY;
-    Image img = null;
+    Image img;
 
-    public Player(GamePanel gp, KeyHandler keyHandler, MouseHandler mouseHandler, EntityHandler entityHandler){
-        this.gp = gp;
+    public Player(KeyHandler keyHandler, MouseHandler mouseHandler, EntityHandler entityHandler){
         this.keyHandler = keyHandler;
         this.setPlayerValues();
         this.mouseHandler = mouseHandler;
@@ -37,13 +33,7 @@ public class Player implements Entity {
         weapon = new Blade(this,mouseHandler, this.entityHandler);
         health = 10000;
         position.setMass(100);
-        try {
-            img = ImageIO.read(new File("src/assets/entities/player/right.png"));
-            img = img.getScaledInstance(GamePanel.tileSize,GamePanel.tileSize,img.SCALE_DEFAULT);
-        }
-        catch (IOException e) {
-            System.out.println("Error");
-        }
+        img = TextureHandler.get("player");
     }
 
     public void setPlayerValues(){

@@ -1,17 +1,13 @@
 package map;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.util.TreeMap;
 
+import assets.TextureHandler;
 import entity.Player;
 import main.GamePanel;
 
-import static assets.Textures.numTiles;
+import static assets.TextureGenerator.numTiles;
 
 public class MapZone {
     public static final int zoneSize = 16; // Number of tiles width and height per zone
@@ -21,7 +17,6 @@ public class MapZone {
         this("grassland");
     }
     public Color baseColor = Color.GREEN;
-    TreeMap<String, Image> tileTextures;
     public MapZone(String type){
         zoneType = type;
         generateGrid();
@@ -47,16 +42,13 @@ public class MapZone {
         }
         return true;
     }
-    public boolean draw(Graphics2D gr, Player player, TreeMap<String, Image> tileTextures, int xOff, int yOff){
-        this.tileTextures = tileTextures;
+    public boolean draw(Graphics2D gr, Player player, int xOff, int yOff){
         int cornerX = xOff * MapGrid.ZonePixels - player.getX();
         int cornerY = yOff * MapGrid.ZonePixels - player.getY();
         int tile = GamePanel.tileSize;
         int playerX = GamePanel.screenWidth/2;
         int playerY = GamePanel.screenHeight/2;
         Image img = null;
-        gr.setColor(baseColor);
-        gr.fillRect(cornerX+playerX, cornerY+ playerY, zoneSize*tile,zoneSize*tile);
 
         int startCol = 0;
         if(cornerX < -GamePanel.screenWidth/2){
@@ -86,7 +78,7 @@ public class MapZone {
             for(int j = startRow; j < endRow; j++){
                 img = null;
                 gr.setColor(tileGrid[i][j].tileColor);
-                img = tileTextures.get(tileGrid[i][j].tileName);
+                img = TextureHandler.get(tileGrid[i][j].tileName);
                 if(img != null){
                     gr.drawImage(img,cornerX+i*tile + playerX, cornerY+j*tile + playerY,null);
                 }
