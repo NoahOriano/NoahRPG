@@ -2,7 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.MouseHandler;
-import map.MapGrid;
+import tools.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,13 +13,11 @@ import java.io.IOException;
 public class Blade implements Weapon{
     Player player;
     MouseHandler mouseHandler;
-    EntityHandler entityHandler;
     int delay = 5;
     int size;
-    public Blade(Player player, MouseHandler mouseHandler, EntityHandler entityHandler){
+    public Blade(Player player, MouseHandler mouseHandler){
         this.player = player;
         this.mouseHandler = mouseHandler;
-        this.entityHandler = entityHandler;
         this.size = 60;
     }
     public boolean attack(Player player, MouseHandler mouseHandler, int charge) {
@@ -50,8 +48,8 @@ public class Blade implements Weapon{
                     player.getX() + (int)(size*(xDir/Math.sqrt(xDir*xDir + yDir*yDir))),
                     player.getY() + (int)(size*(yDir/Math.sqrt(yDir*yDir + xDir*xDir))),
                     size, size);
-            entityHandler.attacks.add(new Attack(10, 60, 10,
-                    player,position,entityHandler, player.getTeam(),img));
+            EntityHandler.attacks.add(new Attack(10, 60, 10,
+                    position, player.getTeam(),img));
             return true;
         }
         return false;

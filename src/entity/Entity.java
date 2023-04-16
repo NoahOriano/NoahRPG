@@ -1,5 +1,7 @@
 package entity;
 
+import tools.Position;
+
 import java.awt.*;
 
 // TODO: Add Comments

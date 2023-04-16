@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 public class TextureGenerator {
-    public static int tileSize = 16;
+    public static int tileSize = 48;
     public static int numTiles = 5;
     public static int width = numTiles*tileSize, height = numTiles*tileSize;
     public static int lightGreen = (255 << 24) | (119 << 16) | (255 << 8) | 89;
@@ -15,7 +15,7 @@ public class TextureGenerator {
     public static int yellowGreen =(255 << 24) | (99 << 16) | (185 << 8) | 13;
     public static void main(String args[]) throws IOException {
         generateSand();
-        //generateGrass();
+        generateGrass();
     }
     static void generateGrass(){
         BufferedImage img = null;
@@ -37,22 +37,18 @@ public class TextureGenerator {
             }
         }
         boolean draw = true;
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                //pixel
-                draw = true;
-                int p =1;
-                int r = (int)(Math.random()*8);
-                if(r <= 4) draw = false;
-                else if(r <= 6) p = mediumGreen;
-                else if(r == 7) p =  darkGreen;
-                else p = yellowGreen;
-                if(draw) {
-                    img.setRGB(x, y, p);
-                    img.setRGB(x, (y +(numTiles* GamePanel.tileSize -1)) % height, p);
-                    if (Math.random() * 4 <= 3){
-                        img.setRGB(x, (y +(numTiles* GamePanel.tileSize -1)*2) % height, p);
-                        if (Math.random() * 2 % 2 == 1) img.setRGB(x, (y +(numTiles* GamePanel.tileSize -1)*3)% height, p);
+        for(int i = 0; i < 10; i++) {
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    //pixel
+                    draw = ((int) (Math.random() * 100)) <= 5;
+                    double ran = Math.random();
+                    int p = (255 << 24) | (52 + (int) (52 * ran) << 16) | (151 + (int) (100 * ran) << 8) | 50 + (int) (52 * ran);
+                    if (draw) {
+                        int end = 10 + ((int) (Math.random() * 10));
+                        for (int j = 0; j < end; j++) {
+                            img.setRGB(x, ((y + j * (numTiles * GamePanel.tileSize - 1))) % height, p);
+                        }
                     }
                 }
             }
@@ -93,16 +89,19 @@ public class TextureGenerator {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 //pixel
-                int p = lightYellow;
+                double ran = Math.random();
+                int p = (255 << 24) | (130+(int)(125*ran) << 16) | ((130+(int)(125*ran) << 8)) | (5+(int)(40*ran));
                 img.setRGB(x, y, p);
             }
         }
+        /*
         boolean draw = true;
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 //pixel
                 draw = true;
-                int p =1;
+                int p = ;
+
                 int r = (int)(Math.random()*8);
                 if(r <= 5) draw = false;
                 else if(r == 6) p = mediumYellow;
@@ -111,9 +110,10 @@ public class TextureGenerator {
                 if(draw) {
                     img.setRGB(x, y, p);
                 }
+
             }
         }
-
+        */
         // write image
         try {
             f = new File("src/assets/generated/random.png");

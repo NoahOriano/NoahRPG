@@ -29,7 +29,7 @@ public class MapZone {
                         tileGrid[i][j] = new Tile("grass"+(i%numTiles)+(j%numTiles));
                     }
                     else{
-                        tileGrid[i][j] = new Tile("grass"+(i%numTiles)+(j%numTiles));
+                        tileGrid[i][j] = new Tile("sand"+(i%numTiles)+(j%numTiles));
                     }
                 }
                 else if(Objects.equals(zoneType, "desert")){

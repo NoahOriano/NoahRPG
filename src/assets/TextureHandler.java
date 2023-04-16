@@ -55,6 +55,22 @@ public class TextureHandler {
         catch (IOException e) {
             System.out.println("Error");
         }
+        try {
+            img = ImageIO.read(new File("src/assets/entities/golem/front.png"));
+            img = img.getScaledInstance(GamePanel.tileSize,GamePanel.tileSize,img.SCALE_DEFAULT);
+            tileTextures.put("golem", img);
+        }
+        catch (IOException e) {
+            System.out.println("Error");
+        }
+        try {
+            img = ImageIO.read(new File("src/assets/equipment/projectiles/boulder.png"));
+            img = img.getScaledInstance(GamePanel.tileSize,GamePanel.tileSize,img.SCALE_DEFAULT);
+            tileTextures.put("boulder", img);
+        }
+        catch (IOException e) {
+            System.out.println("Error");
+        }
     }
     public static Image get(String name){
         return tileTextures.get(name);

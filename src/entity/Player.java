@@ -4,6 +4,8 @@ import assets.TextureHandler;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
+import tools.Position;
+
 import java.awt.*;
 
 // TODO: Add Comments, Implement Stats, Handle Player Death Behavior
@@ -11,7 +13,6 @@ public class Player implements Entity {
 
     public KeyHandler keyHandler;
     public MouseHandler mouseHandler;
-    public EntityHandler entityHandler;
     private int money = 0;
     private int xp = 0;
     private int health = 100;
@@ -23,15 +24,12 @@ public class Player implements Entity {
     private int team = ALLY;
     Image img;
 
-    public Player(KeyHandler keyHandler, MouseHandler mouseHandler, EntityHandler entityHandler){
+    public Player(KeyHandler keyHandler, MouseHandler mouseHandler){
         this.keyHandler = keyHandler;
         this.setPlayerValues();
         this.mouseHandler = mouseHandler;
         attackDelta = 0;
-        this.entityHandler = entityHandler;
-        System.out.println(entityHandler);
-        weapon = new Blade(this,mouseHandler, this.entityHandler);
-        health = 10000;
+        weapon = new Blade(this,mouseHandler);
         position.setMass(100);
         img = TextureHandler.get("player");
     }
@@ -129,6 +127,14 @@ public class Player implements Entity {
     @Override
     public void die() {
 
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     @Override

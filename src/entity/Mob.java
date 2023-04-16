@@ -2,10 +2,10 @@ package entity;
 
 import main.GamePanel;
 import map.MapGrid;
+import tools.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
@@ -18,9 +18,10 @@ public class Mob implements Entity {
     public int health;
     public Position position;
     public int speed;
+    public boolean moving = false;
     public double moveDelta = 0;
     public Color color;
-    private Player player;
+    protected Player player;
     Image img;
 
     Mob(Player player){
@@ -60,29 +61,15 @@ public class Mob implements Entity {
         }
     }
     public void updateGraphic(){
-        try {
-            img = ImageIO.read(new File("src/assets/entities/sheep/right.png"));
-            img = img.getScaledInstance(GamePanel.tileSize,GamePanel.tileSize,img.SCALE_DEFAULT);
-        }
-        catch (IOException e) {
-            System.out.println("Error");
-        }
+
     }
     public void checkCollisions(){
-        for(Entity e : player.entityHandler.entities){
+        for(Entity e : EntityHandler.entities){
             if(e != this)position.checkCollisionPush(e.pos());
         }
     }
     public void move(){
-        moveDelta --;
-        if(moveDelta <= 0){
-            moveDelta = (int) (Math.random()*100);
-            position.setMoving(!position.isMoving());
-            position.speedUp((int)(Math.random()*(speed + 0.5)) - speed/2,(int)(Math.random()*(speed + 0.5)) - speed/2);
-        }
-        if(position.isMoving()){
-            position.move();
-        }
+
     }
     public int getHealth(){
         return this.health;

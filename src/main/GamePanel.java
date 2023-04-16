@@ -22,10 +22,9 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyHandler = new KeyHandler();
     MouseHandler mouseHandler = new MouseHandler();
     Thread gameThread;
-    EntityHandler entityHandler = new EntityHandler();
     MapGrid map = new MapGrid();
-    Player player = new Player(this.keyHandler, this.mouseHandler, this.entityHandler);
-    UserInterface ui = new UserInterface();
+    Player player = new Player(this.keyHandler, this.mouseHandler);
+    UserInterface ui = new UserInterface(player);
 
 
     public GamePanel(){
@@ -35,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
+        this.ui.generateElements();
     }
 
     public void startGameThread(){
@@ -45,8 +45,8 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run(){
 
-        entityHandler.setPlayer(player);
-        entityHandler.start();
+        EntityHandler.setPlayer(player);
+        EntityHandler.start();
 
         int FPS = 60;
         double drawInterval = 1000000000/(double)FPS;
@@ -83,7 +83,8 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
-        entityHandler.update();
+        EntityHandler.update();
+        ui.update();
     }
     @Override
     public void paintComponent(Graphics g){
@@ -91,7 +92,8 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g2);
         // Draw map
         map.draw(g2, player);
-        entityHandler.draw(g2);
+        EntityHandler.draw(g2);
+        ui.draw(g2);
         g2.dispose();
     }
 }

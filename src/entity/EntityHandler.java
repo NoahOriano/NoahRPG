@@ -6,26 +6,31 @@ import java.util.ArrayList;
 // TODO: Add Comments
 
 public class EntityHandler{
-    public Player player;
-    public ArrayList<Entity> entities;
-    public ArrayList<Attack> attacks;
+    public static Player player;
+    public static ArrayList<Entity> entities = new ArrayList<Entity>();;
+    public static ArrayList<Attack> attacks = new ArrayList<Attack>();
     public EntityHandler(){
-        this.entities = new ArrayList<Entity>();
-        this.attacks = new ArrayList<Attack>();
+
     }
-    public void start(){
+    public static void start(){
         entities.add(player);
         for(int i = 0; i < 20; i++){
             entities.add(new Sheep(player));
         }
+        for(int i = 0; i < 5; i++){
+            entities.add(new Golem(player));
+        }
+        for(int i = 0; i < 5; i++){
+            entities.add(new SmallSheep(player));
+        }
     }
-    public void setPlayer(Player player){
-        this.player = player;
+    public static void setPlayer(Player p){
+        player = p;
     }
-    public void addEntity(Mob e){
+    public static void addEntity(Mob e){
         entities.add(e);
     }
-    public void update(){
+    public static void update(){
         for(Entity e: entities){
             e.update();
         }
@@ -47,7 +52,7 @@ public class EntityHandler{
         }
     }
 
-    public void draw(Graphics2D gr){
+    public static void draw(Graphics2D gr){
         for(Entity e: entities){
             e.draw(gr);
         }
