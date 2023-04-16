@@ -59,8 +59,8 @@ public class Golem extends Mob implements Entity{
     public void move(){
         if(position.getDistance(player.pos()) < sightRange){
             Vector direction = position.getDirection(player.pos());
-            position.setDx((int)(direction.list[0] * speed + 0.5));
-            position.setDy((int)(direction.list[1] * speed + 0.5));
+            position.setDx((int)(direction.list[0] * speed));
+            position.setDy((int)(direction.list[1] * speed));
             position.move();
         }
         else {

@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import map.MapGrid;
 import tools.Position;
+import tools.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -49,8 +50,9 @@ public class Mob implements Entity {
     }
     @Override
     public void draw(Graphics2D gr){
-        int relX = (position.getCol() - player.getCol())*MapGrid.ZonePixels + position.getX() - player.getX();
-        int relY = (position.getRow() - player.getRow())*MapGrid.ZonePixels + position.getY() - player.getY();
+        Vector relDraw = this.position.relativeDrawLocationToPlayer();
+        int relX =(int)relDraw.list[0];
+        int relY =(int)relDraw.list[1];
         if(img != null){
             gr.drawImage(img, GamePanel.screenWidth/2 + relX - position.getWidth()/2,
                     GamePanel.screenHeight/2 + relY - position.getHeight()/2, null);

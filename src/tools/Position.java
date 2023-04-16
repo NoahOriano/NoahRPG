@@ -3,6 +3,10 @@ package tools;
 import entity.Player;
 import main.GamePanel;
 import map.MapGrid;
+import entity.EntityHandler;
+
+import java.util.Map;
+
 // TODO: Add Comments
 public class Position {
     private int x;
@@ -25,32 +29,51 @@ public class Position {
         this.mass = 100;
     }
     public int xOffset(Position position){
-        return (position.getX()-this.getX() + MapGrid.ZonePixels*(position.getCol() - this.getCol()));
+        int colOff = position.getCol()-this.getCol();
+        if(colOff > 0){
+            if(Math.abs(colOff) > Math.abs(MapGrid.mapCol-colOff)){
+                colOff = colOff - MapGrid.mapCol;
+            }
+        }
+        if(colOff < 0){
+            if(Math.abs(colOff) > Math.abs(MapGrid.mapCol+colOff)){
+                colOff = colOff + MapGrid.mapCol;
+            }
+        }
+        return MapGrid.ZonePixels*(colOff) + position.x - this.x;
     }
     public int yOffset(Position position){
-        return (position.getY()-this.getY() + MapGrid.ZonePixels*(position.getRow() - this.getRow()));
+        int rowOff = position.getRow()-this.getRow();
+        if(rowOff > 0){
+            if(Math.abs(rowOff) > Math.abs(MapGrid.mapCol-rowOff)){
+                rowOff = rowOff - MapGrid.mapCol;
+            }
+        }
+        if(rowOff < 0){
+            if(Math.abs(rowOff) > Math.abs(MapGrid.mapCol+rowOff)){
+                rowOff = rowOff + MapGrid.mapCol;
+            }
+        }
+        return MapGrid.ZonePixels*(rowOff) + position.y - this.y;
     }
     public boolean checkCollision(Position position){
-        int xOff = position.getX() + position.getWidth() / 2 - this.getX() - this.getWidth()/2+ (position.getCol() - this.getCol()) * MapGrid.ZonePixels;
-        int yOff = position.getY() + position.getHeight() / 2 - this.getY() - this.getHeight()/2+ (position.getRow() - this.getRow()) * MapGrid.ZonePixels;
-        if (Math.abs(xOff) < (position.getWidth() / 2 + this.width / 2)) {
-            if (Math.abs(yOff) < (position.getHeight() / 2 + this.height / 2)) {
+        if (Math.abs(this.xOffset(position)) < (position.getWidth() / 2 + this.width / 2)) {
+            if (Math.abs(this.yOffset(position)) < (position.getHeight() / 2 + this.height / 2)) {
                 return true;
             }
         }
         return false;
     }
     public boolean onScreen(Player player){
-        int xOff = this.getX()-player.getX() + MapGrid.ZonePixels*(this.getCol()- player.getCol()) - this.width/2 + player.pos().width/2;
-        int yOff = this.getY()-player.getY() + MapGrid.ZonePixels*(this.getRow()- player.getRow()) - this.height/2 + player.pos().height/2;
-        return (Math.abs(xOff) < GamePanel.screenWidth/2 && Math.abs(yOff) < GamePanel.screenHeight);
+        return (Math.abs(this.xOffset(player.pos())) < GamePanel.screenWidth/2 &&
+                Math.abs(this.yOffset(player.pos())) < GamePanel.screenHeight);
     }
     public boolean checkCollisionPush(Position position){
         // Need to maintain ratio of xOff to yOff somehow
         int trueWidth = (position.getWidth() + this.getWidth())/2;
         int trueHeight = (position.getHeight() + this.getHeight())/2;
-        int xOff = position.getX() - this.getX() + (position.getCol() - this.getCol()) * MapGrid.ZonePixels;
-        int yOff = position.getY() - this.getY() + (position.getRow() - this.getRow()) * MapGrid.ZonePixels;
+        int xOff = this.xOffset(position);
+        int yOff = this.yOffset(position);
         if (Math.abs(xOff) < (position.getWidth() / 2 + this.width / 2)) {
             if (Math.abs(yOff) < (position.getHeight() / 2 + this.height / 2)) {
                 double moveThis = position.mass/(this.mass +0.0+ position.mass);
@@ -101,6 +124,19 @@ public class Position {
         if(this.y > MapGrid.ZonePixels){
             this.row ++;
             this.y -=MapGrid.ZonePixels;
+        }
+        // Check for map wraparounds
+        if(this.col < 0){
+            this.col = MapGrid.mapCol-1;
+        }
+        if(this.col >= MapGrid.mapCol){
+            this.col = 0;
+        }
+        if(this.row < 0){
+            this.row = MapGrid.mapCol-1;
+        }
+        if(this.row >= MapGrid.mapRow){
+            this.row = 0;
         }
     }
 
@@ -189,8 +225,8 @@ public class Position {
     }
 
     public double getDistance(Position pos) {
-        int xx = (pos.col - this.col)*MapGrid.ZonePixels + pos.x - this.x;
-        int yy = (pos.row - this.row)*MapGrid.ZonePixels + pos.y - this.y;
+        int xx = xOffset(pos);
+        int yy = yOffset(pos);
         return Math.sqrt(xx*xx + yy*yy);
     }
     public Vector getDirection(Position pos){
@@ -198,5 +234,8 @@ public class Position {
     }
     public Position copy() {
         return new Position(this.col, this.row, this.x, this.y, this.width, this.height);
+    }
+    public Vector relativeDrawLocationToPlayer(){
+        return new Vector(-this.xOffset(EntityHandler.player.pos()),-this.yOffset(EntityHandler.player.pos()));
     }
 }
