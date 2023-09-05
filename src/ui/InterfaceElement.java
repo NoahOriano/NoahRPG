@@ -7,7 +7,7 @@ public class InterfaceElement {
     protected int y;
     protected int width;
     protected int height;
-    private Color baseColor = Color.GRAY;
+    protected Color baseColor = Color.GRAY;
     public InterfaceElement(){
 
     }

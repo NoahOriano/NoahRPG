@@ -1,6 +1,7 @@
 package entity;
 
 import assets.TextureHandler;
+import entity.player.Player;
 
 import java.awt.*;
 
@@ -12,6 +13,7 @@ public class SmallSheep extends Mob implements Entity{
         super(player);
         this.pos().setWidth(16);
         this.pos().setHeight(16);
+        this.speed = 10;
         this.updateGraphic();
     }
     @Override

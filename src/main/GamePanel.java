@@ -1,6 +1,7 @@
 package main;
 
 import entity.*;
+import entity.player.Player;
 import map.MapGrid;
 import ui.UserInterface;
 
@@ -59,14 +60,17 @@ public class GamePanel extends JPanel implements Runnable{
 
         while(gameThread != null){
             //System.out.println("The game loop is running");
+            gamePaused = keyHandler.getSwitch("p");
+            if(gamePaused) {
+                lastTime = System.nanoTime();
+            }
             if(!gamePaused) {
-                if(keyHandler.p)gamePaused=true;
                 currentTime = System.nanoTime();
                 delta += (currentTime - lastTime) / drawInterval;
                 timer += (currentTime - lastTime);
                 lastTime = currentTime;
                 if (delta > 0) {
-                    if(!gamePaused) update();
+                    update();
                     repaint();
                     delta--;
                     drawCount++;
@@ -83,13 +87,14 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
+        keyHandler.update();
+        mouseHandler.update();
         EntityHandler.update();
         ui.update();
     }
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        super.paintComponent(g2);
         // Draw map
         map.draw(g2, player);
         EntityHandler.draw(g2);

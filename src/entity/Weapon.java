@@ -1,5 +1,6 @@
 package entity;
 
+import entity.player.Player;
 import main.MouseHandler;
 
 public interface Weapon {

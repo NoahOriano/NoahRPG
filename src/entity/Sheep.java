@@ -1,11 +1,8 @@
 package entity;
 
 import assets.TextureHandler;
-import main.GamePanel;
-import map.MapGrid;
-import tools.Position;
+import entity.player.Player;
 
-import java.awt.*;
 import java.lang.Math;
 
 // TODO: Add Comments, Extend Mob and move all mob shared methods & variables to Mob class

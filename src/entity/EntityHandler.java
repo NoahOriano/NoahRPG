@@ -1,5 +1,7 @@
 package entity;
 
+import entity.player.Player;
+
 import java.awt.*;
 import java.util.ArrayList;
 

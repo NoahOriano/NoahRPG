@@ -1,11 +1,47 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Noah Oriano
+// KeyHandler
+// 4-16-2023
+// Handles the input of keys into the game by controlling boolean values, simply holds whether each key
+// Is currently pressed or switched on
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.TreeMap;
 
 public class KeyHandler implements KeyListener {
+    private class KeyValue{
+        public boolean key;
+        public boolean swtch;
+        public boolean lag;
+        public void pressed(){
+            key = true;
+            if(!lag) swtch = !swtch;
+            lag = true;
+        }
+        public void released(){
+            key = false;
+            lag = false;
+        }
+    }
+    public TreeMap<String, KeyValue> keys;
 
-    public boolean w, s, a, d, l,p;
+    public KeyHandler(){
+        keys = new TreeMap<String,KeyValue>();
+        for(int i = 0; i < 26; i++){
+            keys.put(String.valueOf((char)('a' + i)), new KeyValue());
+        }
+        String[] list = {};
+        for(int i = 0; i < list.length; i++){
+            keys.put(list[i], new KeyValue());
+        }
+    }
+    public void update(){
+
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         //Unused
@@ -16,22 +52,22 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_W){
-            w = true;
+            keys.get("w").pressed();
         }
         if(code == KeyEvent.VK_S){
-            s = true;
+            keys.get("s").pressed();
         }
         if(code == KeyEvent.VK_A){
-            a = true;
+            keys.get("a").pressed();
         }
         if(code == KeyEvent.VK_D){
-            d = true;
+            keys.get("d").pressed();
         }
         if(code == KeyEvent.VK_L){
-            l = true;
+            keys.get("l").pressed();
         }
         if(code == KeyEvent.VK_P){
-            p = true;
+            keys.get("p").pressed();
         }
     }
 
@@ -40,22 +76,28 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_W){
-            w = false;
+            keys.get("w").released();
         }
         if(code == KeyEvent.VK_S){
-            s = false;
+            keys.get("s").released();
         }
         if(code == KeyEvent.VK_A){
-            a = false;
+            keys.get("a").released();
         }
         if(code == KeyEvent.VK_D){
-            d = false;
+            keys.get("d").released();
         }
         if(code == KeyEvent.VK_L){
-            l = false;
+            keys.get("l").released();
         }
         if(code == KeyEvent.VK_P){
-            p = false;
+            keys.get("p").released();
         }
+    }
+    public boolean getPressed(String key){
+        return keys.get(key).key;
+    }
+    public boolean getSwitch(String key){
+        return keys.get(key).swtch;
     }
 }

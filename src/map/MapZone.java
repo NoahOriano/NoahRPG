@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Objects;
 
 import assets.TextureHandler;
-import entity.Player;
+import entity.player.Player;
 import main.GamePanel;
 
 import static assets.TextureGenerator.numTiles;

@@ -1,11 +1,9 @@
 package tools;
 
-import entity.Player;
+import entity.player.Player;
 import main.GamePanel;
 import map.MapGrid;
 import entity.EntityHandler;
-
-import java.util.Map;
 
 // TODO: Add Comments
 public class Position {

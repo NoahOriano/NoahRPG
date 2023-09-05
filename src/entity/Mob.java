@@ -1,14 +1,11 @@
 package entity;
 
+import entity.player.Player;
 import main.GamePanel;
-import map.MapGrid;
 import tools.Position;
 import tools.Vector;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.lang.Math;
 
 // TODO: Add Comments, Convert into base method for all other entities to extend

@@ -1,6 +1,7 @@
 package entity;
 
 import assets.TextureHandler;
+import entity.player.Player;
 import tools.Position;
 import tools.Vector;
 
@@ -9,10 +10,10 @@ import java.awt.*;
 // TODO: Add Comments, Extend Mob and move all mob shared methods & variables to Mob class
 
 public class Golem extends Mob implements Entity{
-    int attackDelay = 40;
+    int attackDelay = 60;
     int attackDelta = 0;
-    int sightRange = 400;
-    int attackRange = 200;
+    int sightRange = 800;
+    int attackRange = 400;
     int projectileSpeed = 10;
     int projectileSize = 40;
     Golem(Player player){

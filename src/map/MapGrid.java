@@ -1,9 +1,8 @@
 package map;
 
-import entity.Player;
+import entity.player.Player;
 import main.GamePanel;
 
-import java.lang.Math;
 import java.awt.*;
 
 public class MapGrid {

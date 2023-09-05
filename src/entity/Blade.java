@@ -1,5 +1,6 @@
 package entity;
 
+import entity.player.Player;
 import main.GamePanel;
 import main.MouseHandler;
 import tools.Position;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class Blade implements Weapon{
     Player player;
     MouseHandler mouseHandler;
-    int delay = 5;
+    int delay = 20;
     int size;
     public Blade(Player player, MouseHandler mouseHandler){
         this.player = player;
@@ -48,7 +49,7 @@ public class Blade implements Weapon{
                     player.getX() + (int)(size*(xDir/Math.sqrt(xDir*xDir + yDir*yDir))),
                     player.getY() + (int)(size*(yDir/Math.sqrt(yDir*yDir + xDir*xDir))),
                     size, size);
-            EntityHandler.attacks.add(new Attack(10, 60, 10,
+            EntityHandler.attacks.add(new Attack(20, 60, 10,
                     position, player.getTeam(),img));
             return true;
         }
